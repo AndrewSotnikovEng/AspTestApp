@@ -1,0 +1,33 @@
+﻿@model TestApp.Models.Student
+
+    <div class="container">
+        <div class="spacer index-button-long mt-2">
+            <a class="btn btn-primary a-btn-slide-text" asp-controller="Student" asp-action="Index">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <span><strong>Обратно</strong></span>
+            </a>
+        </div>
+        <form action="Edit" method="post">
+            <div style="display:none">
+                <input class="form-control" name="Id" value="@Model.Id" />
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="School">Школа</label>
+                <input class="form-control" name="School" value="@Model.School" />
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="Grade">Класс</label>
+                <input class="form-control" name="Grade" value="@Model.Grade" />
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="DesiredUniversity">Вуз для поступления</label>
+                <input class="form-control" name="DesiredUniversity" value="@Model.DesiredUniversity" />
+            </div>
+            <div class="form-group mt-2">
+                <label asp-for="PhoneNumber">Контактый телефон</label>
+                <input class="form-control" name="PhoneNumber" value="@Model.PhoneNumber" />
+            </div>
+            <button type="submit" class="btn btn-primary index-button-long mt-2">Изменить!</button>
+        </form>
+    </div>
+

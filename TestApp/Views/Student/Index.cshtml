@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TestApp.Models.Student>
+
+
+
+    <div class="container">
+        <div class="row spacer index-button">
+            <a class="btn btn-primary a-btn-slide-text"  asp-controller="Student" asp-action="Add">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <span><strong>Add</strong></span>
+            </a>
+        </div>
+        @foreach (TestApp.Models.Student s in Model)
+        {
+        <div class="row spacer border border-primary">
+
+            <div class="col-12 col-md-10 align-self-center">
+                @s.ToString()
+            </div>
+
+            <div class="col-12 col-md-1 mt-2 mb-2">
+                <a class="btn btn-primary a-btn-slide-text index-button" asp-controller="Student" asp-action="Edit" asp-route-id="@s.Id">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    <span><strong>Edit</strong></span>
+                </a>
+            </div>
+            <div class="col-12 col-md-1 mt-2 mb-2">
+                <a class="btn btn-primary a-btn-slide-text index-button" asp-controller="Student" asp-action="Delete" asp-route-id="@s.Id">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    <span><strong>Delete</strong></span>
+                </a>
+            </div>
+        </div>
+        }
+      </div>
+

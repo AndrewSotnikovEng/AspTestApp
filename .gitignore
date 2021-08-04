@@ -1,6 +1,7 @@
 ###################
 # compiled source #
 ###################
+.vs/
 *.com
 *.class
 *.dll
@@ -22,8 +23,8 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
-bin/
-obj/
+**/bin/
+**/obj/
 TestResults/
 ###################
 # Web publish log #

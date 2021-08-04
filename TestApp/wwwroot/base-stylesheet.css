@@ -1,0 +1,21 @@
+﻿.spacer {
+    margin-top: 10px; /* define margin as you see fit */
+}
+/*
+.list-item {
+    vertical-align:central;
+}*/
+
+.index-button {
+    width: 70px; height: 38px; vertical-align:central;
+}
+
+.index-button-long {
+    width: 120px;
+    height: 38px;
+    vertical-align: central;
+}
+
+.align-to-left {
+    padding-left: 0px;
+}
