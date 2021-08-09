@@ -47,6 +47,7 @@ namespace TestApp
             app.UseRouting();
             app.UseStaticFiles();
             app.UseStatusCodePages();
+            app.UseCors();
 
 
             app.UseEndpoints(endpoints =>

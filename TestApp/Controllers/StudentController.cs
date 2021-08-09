@@ -49,6 +49,8 @@ namespace TestApp.Controllers
         public IActionResult Edit(Student s)
         {
             Student studentToEdit = _dbContext.Students.Where(_s => _s.Id == s.Id).FirstOrDefault();
+            studentToEdit.FirstName = s.FirstName;
+            studentToEdit.LastName = s.LastName;
             studentToEdit.School = s.School;
             studentToEdit.DesiredUniversity = s.DesiredUniversity;
             studentToEdit.PhoneNumber = s.PhoneNumber;

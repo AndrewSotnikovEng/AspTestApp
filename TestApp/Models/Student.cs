@@ -9,6 +9,8 @@ namespace TestApp.Models
     {
         public int Id { get; set; }
         public int UserID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string School { get; set; }
         public string Grade { get; set; }
         public string DesiredUniversity { get; set; }
@@ -16,7 +18,7 @@ namespace TestApp.Models
 
         public override string ToString()
         {
-            return $"School: {School} - Grade: {Grade} - DesiredUniversity: {DesiredUniversity}";
+            return $"{FirstName + " " + LastName} School: {School} - Grade: {Grade} - DesiredUniversity: {DesiredUniversity}";
         }
     }
 }
