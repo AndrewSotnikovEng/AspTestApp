@@ -14,5 +14,32 @@ namespace TestApp.Models
         public string Agenda { get; set; }
         public bool Ordered { get; set; }
         public string NextLessonAgenda { get; set; }
+
+        public string LessonDateUniversal { get 
+            {
+                DateTime dt = DateTime.Parse(LessonDate);
+
+                return $"{dt.Year}-{dt.Month.ToString("d2")}-{dt.Day.ToString("d2")}";
+            } }
+
+        public string LessonDateUniversalMin 
+        {
+            get
+            {
+                DateTime dt = DateTime.Today.AddMonths(-1);
+                return $"{dt.Year}-{dt.Month.ToString("d2")}-{dt.Day.ToString("d2")}";
+            }
+        }
+
+        public string LessonDateUniversalMax
+        {
+            get
+            {
+                DateTime dt = DateTime.Today.AddMonths(1);
+                return $"{dt.Year}-{dt.Month.ToString("d2")}-{dt.Day.ToString("d2")}";
+            }
+        }
+
+
     }
 }

@@ -1,5 +1,10 @@
 ﻿@model TestApp.Models.LessonViewModel
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/students-autocomplete.js"></script>
+
 <div class="container">
     <div class="spacer index-button-long mt-2">
         <a class="btn btn-primary a-btn-slide-text" asp-controller="Lesson" asp-action="Index">
@@ -8,18 +13,33 @@
         </a>
     </div>
     <form action="Add" method="post">
+        <div class="form-group mt-2 ui-widget mb-2">
+            <label>Студент</label>
+            <input class="form-control" id="StudentIdInput" />
+        </div>
         <div class="form-group">
-            <div class="container align-to-left">
-                <label for="birthday">Начало:</label>
-                <div class="row">
+            <div class="container align-to-left mb-2">
+                <div class="row mb-1">
                     <div class="col-4">
-                        <input type="date" id="birthday" asp-for="LessonDate" class="form-control" value="@Model.LessonDate">
+                        <label>Дата</label>
+                    </div>
+                    <div class="col-2 text-center">
+                        <label>Начало</label>
+                    </div>
+                    <div class="col-2 text-center">
+                        <label>Конец</label>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <input type="date" asp-for="LessonDate" class="form-control" value="@Model.LessonDateUniversal"
+                               min="@Model.LessonDateUniversalMin" max="@Model.LessonDateUniversalMax">
                     </div>
                     <div class="col-2">
-                        <input type="time" id="birthday" asp-for="StartTime" class="form-control" value="@Model.StartTime">
+                        <input type="time" asp-for="StartTime" class="form-control" value="@Model.StartTime">
                     </div>
                     <div class="col-2">
-                        <input type="time" id="birthday" asp-for="EndTime" class="form-control" value="@Model.EndTime">
+                        <input type="time" asp-for="EndTime" class="form-control" value="@Model.EndTime">
                     </div>
                 </div>
             </div>
@@ -30,7 +50,7 @@
             <input class="form-control" style="display:none" asp-for="LessonId" value="@Model.LessonId" />
         </div>
         <div class="form-check mt-2">
-            <input class="form-check-input" type="checkbox" id="orderedCheckBox" asp-for="Ordered" value="@Model.Ordered">
+            <input class="form-check-input" type="checkbox" id="orderedCheckBox" asp-for="Ordered" checked="@Model.Ordered">
             <label class="form-check-label" for="orderedCheckBox">
                 Оплачено
             </label>
