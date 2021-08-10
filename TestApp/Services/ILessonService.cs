@@ -12,5 +12,9 @@ namespace TestApp.Services
 
         Lesson LvmToLesson(LessonViewModel lvm);
 
+        public string GetStudentNameById(int id);
+
+        public string GetPaymentColorById(int id);
+
     }
 }

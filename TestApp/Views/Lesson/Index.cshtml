@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<TestApp.Models.Lesson>
+@inject ILessonService service
 
 
 
@@ -11,14 +12,14 @@
     </div>
     @foreach (TestApp.Models.Lesson l in Model)
     {
-        <div class="row spacer border border-primary align-items-center">
+        <div class="row spacer border border-primary align-items-center" style="background-color:@service.GetPaymentColorById(l.Id)">
 
 
-            <div class="col-12 col-md-3 ">
-                    Student: @l.StudentId
+            <div class="col-12 col-md-5 ">
+                    Student: @service.GetStudentNameById(l.StudentId)
             </div>
 
-            <div class="col-12 col-md-7">
+            <div class="col-12 col-md-5">
                     @l.ToString()
             </div>
 

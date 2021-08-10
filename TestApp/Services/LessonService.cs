@@ -49,5 +49,21 @@ namespace TestApp.Services
 
             return lvm;
         }
+
+        public string GetStudentNameById(int id)
+        {
+            Student stud = _dbContext.Students.Where(x => x.Id == id).FirstOrDefault();
+
+            return $"{stud.FirstName} {stud.LastName}";
+        }
+
+        public string GetPaymentColorById(int id)
+        {
+            Lesson lesson = _dbContext.Lessons.Where(x => x.Id == id).FirstOrDefault();
+            string result = lesson.Ordered ? "white" : "#FFC0CB";
+
+            return result;
+        }
+
     }
 }
