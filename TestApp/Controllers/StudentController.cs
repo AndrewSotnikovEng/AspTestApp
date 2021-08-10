@@ -35,7 +35,8 @@ namespace TestApp.Controllers
         {
             _dbContext.Students.Add(s);
             _dbContext.SaveChanges();
-            return View();
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

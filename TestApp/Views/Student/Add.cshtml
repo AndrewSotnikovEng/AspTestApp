@@ -18,20 +18,20 @@
                 <input asp-for="LastName" id="Language" class="form-control"/>
             </div>
             <div class="form-group mt-2">
-                <label asp-for="School">Школа</label>
-                <input id="Language" class="form-control" name="School" />
+                <label >Школа</label>
+                <input id="Language" class="form-control" asp-for="School" />
             </div>
             <div class="form-group mt-2">
-                <label asp-for="Grade">Класс</label>
-                <input class="form-control" name="Grade" />
+                <label >Класс</label>
+                <input class="form-control" name="Grade" asp-for="Grade"/>
             </div>
             <div class="form-group mt-2">
-                <label asp-for="DesiredUniversity">Вуз для поступления</label>
-                <input class="form-control" name="DesiredUniversity" />
+                <label >Вуз для поступления</label>
+                <input class="form-control"  asp-for="DesiredUniversity" />
             </div>
             <div class="form-group mt-2">
-                <label asp-for="PhoneNumber">Контактый телефон</label>
-                <input class="form-control" name="PhoneNumber" />
+                <label >Контактый телефон</label>
+                <input class="form-control" asp-for="PhoneNumber"  />
             </div>
             <button type="submit" class="btn btn-primary index-button-long mt-2">Отправить!</button>
         </form>
