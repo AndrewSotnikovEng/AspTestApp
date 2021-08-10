@@ -1,20 +1,24 @@
-﻿$(function () {
-    var availableTags = [
-        "Андрей Сотников : 737",
-        "Елена Петраускас : 38",
-        "Лена Селиванова : 760",
-        "Сегрей Слободян : 433",
-        "Иван Явтошенко : 683 ",
-        "Татьяна Тарасевич : 183",
-        "Павел Иценко : 1131  ",
-        "Дарья Букина : 53    ",
-        "Денис Фонвизин : 304 ",
-        "Владимир Соболев : 10",
-        "Антон Кинев : 414    ",
-        "Татьяна Саватеева : 41",
-        "Елизавета Фролова : 14"
-    ];
-    $("#StudentIdInput").autocomplete({
-        source: availableTags
-    });
+﻿var students = null;
+
+$(function () {
+
+    let url = 'https://localhost:44346/studentapi';
+
+    fetch(url)
+        .then(res => res.json())
+        .then(data => students = data)
 });
+
+
+document.getElementById("StudentIdInput").addEventListener("keypress",
+    function () {
+        if (students == null) {
+            console.log("Please check connection!")
+            alert("Not able to access API")
+        }
+        console.log("Students", students)
+        $("#StudentIdInput").autocomplete({
+            source: students
+        });
+    }
+)

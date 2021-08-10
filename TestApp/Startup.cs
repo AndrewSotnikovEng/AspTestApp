@@ -29,6 +29,7 @@ namespace TestApp
         {
             services.AddControllersWithViews();
             services.AddMvcCore();
+            services.AddCors();
             // Add framework services.
             services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
@@ -47,7 +48,7 @@ namespace TestApp
             app.UseRouting();
             app.UseStaticFiles();
             app.UseStatusCodePages();
-            app.UseCors();
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
 
             app.UseEndpoints(endpoints =>

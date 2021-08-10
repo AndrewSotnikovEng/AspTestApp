@@ -20,9 +20,10 @@ namespace TestApp.Controllers
             _dbContext = dbContext;
         }
 
-        public IEnumerable<Student> GetStudents()
+        public IEnumerable<string> GetStudents()
         {
-            return _dbContext.Students;
+            IEnumerable<string> students =  _dbContext.Students.Select(x => $"{x.FirstName} {x.LastName} : {x.Id}");
+            return students;
         }
     }
 }
