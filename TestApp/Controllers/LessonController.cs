@@ -12,9 +12,11 @@ namespace TestApp.Controllers
     {
 
         private AppDbContext _dbContext;
-        public LessonController(AppDbContext dbContext)
+        ILessonService _service;
+        public LessonController(AppDbContext dbContext, ILessonService service)
         {
             _dbContext = dbContext;
+            _service = service;
         }
 
         //[Route("Student/Index")]
@@ -34,9 +36,8 @@ namespace TestApp.Controllers
         [HttpPost]
         public IActionResult Add(LessonViewModel lvm)
         {
-            LessonService service = new LessonService();
 
-            _dbContext.Lessons.Add(service.LvmToLesson(lvm));
+            _dbContext.Lessons.Add(_service.LvmToLesson(lvm));
             _dbContext.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -45,18 +46,18 @@ namespace TestApp.Controllers
         public IActionResult Edit(int id)
         {
             Lesson lessonToEdit = _dbContext.Lessons.Where(l => l.Id == id).FirstOrDefault();
-            LessonService service = new LessonService();
 
-            return View(service.LessonToLvm(lessonToEdit));
+            return View(_service.LessonToLvm(lessonToEdit));
         }
 
         [HttpPost]
         public IActionResult Edit(LessonViewModel lvm)
         {
             Lesson lessonToEdit = _dbContext.Lessons.Where(l => l.Id == lvm.LessonId).FirstOrDefault();
-            LessonService service = new LessonService();
-            Lesson updatedLesson = service.LvmToLesson(lvm);
+            Lesson updatedLesson = _service.LvmToLesson(lvm);
 
+            //todo: Add replace method to model
+            lessonToEdit.StudentId = updatedLesson.StudentId;
             lessonToEdit.StartDate = updatedLesson.StartDate;
             lessonToEdit.EndDate = updatedLesson.EndDate;
             lessonToEdit.Ordered = updatedLesson.Ordered;

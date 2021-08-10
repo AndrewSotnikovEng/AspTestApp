@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using TestApp.Models;
+using TestApp.Services;
 
 namespace TestApp
 {
@@ -35,6 +36,7 @@ namespace TestApp
                 options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
 
                 );
+            services.AddScoped<ILessonService, LessonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

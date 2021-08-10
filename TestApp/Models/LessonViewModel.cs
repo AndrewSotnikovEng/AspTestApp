@@ -8,6 +8,7 @@ namespace TestApp.Models
     public class LessonViewModel
     {
         public int LessonId { get; set; }
+        public string StudentNameAndId { get; set; }
         public string LessonDate { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
