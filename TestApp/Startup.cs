@@ -37,6 +37,7 @@ namespace TestApp
 
                 );
             services.AddScoped<ILessonService, LessonService>();
+            services.AddScoped<IStatisticService, StatisticService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

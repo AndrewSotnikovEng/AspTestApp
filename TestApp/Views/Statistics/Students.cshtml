@@ -1,0 +1,36 @@
+﻿@inject IStatisticService service
+@model StatisticStudentsViewModel
+
+<div class="container">
+    <div>
+        <h2 style="text-align: center">Учитель</h2>
+    </div>
+</div>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" >#</th>
+            <th scope="col" </th>
+            <th scope="col" >Среднее в неделю</th>
+            <th scope="col" >На этой неделе</th>
+            <th scope="col" >На прошлой</th>
+            <th scope="col" >Всего</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td></td>
+            <td>@service.GetTeacherAverageLessons()</td>
+            <td>@service.GetTeacherCurrentWeekLessons()</td>
+            <td>@service.GetTeachePreviousWeekLessons()</td>
+            <td>@service.GetTeacherToltalLessons()</td>
+        </tr>
+
+    </tbody>
+</table>
+<div class="container">
+    <div >
+        <h2 style="text-align:center">Студенты</h2>
+    </div>
+</div>

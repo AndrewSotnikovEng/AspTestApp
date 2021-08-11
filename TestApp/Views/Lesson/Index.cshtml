@@ -4,18 +4,26 @@
 
 
 <div class="container">
-    <div class="row spacer index-button">
-        <a class="btn btn-primary a-btn-slide-text" asp-controller="Lesson" asp-action="Add">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            <span><strong>Add</strong></span>
-        </a>
+    <div class="row spacer">
+        <div class="col-12 col-md-1 mt-2 mb-2">
+            <a class="btn btn-primary a-btn-slide-text index-button" asp-controller="Lesson" asp-action="Add">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <span><strong>Add</strong></span>
+            </a>
+        </div>
+        <div class="col-12 col-md-6 mt-2 mb-2">
+            @*empty space*@
+        </div>
+        <div class="col-12 col-md-5 mt-2 mb-2">
+            <input class="form-control" id="filterInput"/>
+        </div>
     </div>
     @foreach (TestApp.Models.Lesson l in Model)
     {
         <div class="row spacer border border-primary align-items-center" style="background-color:@service.GetPaymentColorById(l.Id)">
 
 
-            <div class="col-12 col-md-5 ">
+            <div class="col-12 col-md-5" id="lesson-item">
                     Student: @service.GetStudentNameById(l.StudentId)
             </div>
 
@@ -39,4 +47,5 @@
         </div>
     }
 </div>
+<script src="~/lesson-filer.js"></script>
 
