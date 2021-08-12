@@ -7,14 +7,14 @@ namespace TestApp.Models
     //todo : Remove
     public class StatisticStudentsViewModel
     {
-        //public List<Student> Students { get; set; }
+        public IEnumerable<Student> Students { get; set; }
 
         public IEnumerable<Lesson> Lessons { get; set; }
 
         
-        public StatisticStudentsViewModel(IEnumerable lessons)
+        public StatisticStudentsViewModel(IEnumerable lessons, IEnumerable students)
         {
-            //this.Students = (List<Student>)students;
+            this.Students = (IEnumerable<Student>)students;
             this.Lessons = (IEnumerable<Lesson>)lessons;
         }
     }

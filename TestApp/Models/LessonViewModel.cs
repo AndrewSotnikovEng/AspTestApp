@@ -18,29 +18,9 @@ namespace TestApp.Models
 
         public string LessonDateUniversal { get 
             {
-                DateTime dt = DateTime.Parse(LessonDate);
+                DateTime dt = DateTime.ParseExact(LessonDate,"MMddYYYY",null);
 
                 return $"{dt.Year}-{dt.Month.ToString("d2")}-{dt.Day.ToString("d2")}";
             } }
-
-        public string LessonDateUniversalMin 
-        {
-            get
-            {
-                DateTime dt = DateTime.Today.AddMonths(-1);
-                return $"{dt.Year}-{dt.Month.ToString("d2")}-{dt.Day.ToString("d2")}";
-            }
-        }
-
-        public string LessonDateUniversalMax
-        {
-            get
-            {
-                DateTime dt = DateTime.Today.AddMonths(1);
-                return $"{dt.Year}-{dt.Month.ToString("d2")}-{dt.Day.ToString("d2")}";
-            }
-        }
-
-
     }
 }

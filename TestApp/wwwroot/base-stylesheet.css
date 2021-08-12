@@ -19,3 +19,10 @@
 .align-to-left {
     padding-left: 0px;
 }
+
+.table-header-students {
+    width: 5%;
+    background-color: LightGray; 
+    vertical-align: top;
+}
+

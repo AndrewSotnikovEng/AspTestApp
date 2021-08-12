@@ -15,9 +15,9 @@ namespace TestApp.Services
         public int GetTeachePreviousWeekLessons();
 
 
-        public int GetStudentAverageLessons();
-        public int GetStudentToltalLessons();
-        public int GetStudentCurrentWeekLessons();
-        public int GetStudentPreviousWeekLessons();
+        public int GetStudentAverageLessons(int studentId);
+        public int GetStudentToltalLessons(int studentId);
+        public int GetStudentCurrentWeekLessons(int studentId);
+        public int GetStudentPreviousWeekLessons(int studentId);
     }
 }

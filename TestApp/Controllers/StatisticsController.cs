@@ -24,7 +24,8 @@ namespace TestApp.Controllers
         public IActionResult Students()
         {
 
-            StatisticStudentsViewModel vm = new StatisticStudentsViewModel(_dbContext.Lessons);
+            StatisticStudentsViewModel vm = new StatisticStudentsViewModel(_dbContext.Lessons,
+                _dbContext.Students);
 
             return View(vm);
         }

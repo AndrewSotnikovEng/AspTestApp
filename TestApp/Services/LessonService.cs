@@ -17,8 +17,8 @@ namespace TestApp.Services
         public Lesson LvmToLesson(LessonViewModel lvm)
         {
 
-            DateTime startDt = DateTime.Parse(lvm.LessonDate + " " + lvm.StartTime);
-            DateTime endDt = DateTime.Parse(lvm.LessonDate + " " + lvm.EndTime);
+            DateTime startDt = DateTime.ParseExact(lvm.LessonDate + " " + lvm.StartTime, "MM/dd/yyyy HH:mm", null);
+            DateTime endDt = DateTime.ParseExact(lvm.LessonDate + " " + lvm.EndTime, "MM/dd/yyyy HH:mm", null);
 
             Lesson lesson = new Lesson();
             lesson.Id = lvm.LessonId;
@@ -41,9 +41,9 @@ namespace TestApp.Services
             lvm.StudentNameAndId = $"{stud.FirstName} {stud.LastName} : {stud.Id}";
             
 
-            lvm.LessonDate = lesson.StartDate.Date.ToString();
-            lvm.StartTime = lesson.StartDate.TimeOfDay.ToString();
-            lvm.EndTime = lesson.EndDate.TimeOfDay.ToString();
+            lvm.LessonDate = $"{lesson.StartDate.Month.ToString("d2")}/{lesson.StartDate.Day.ToString("d2")}/{lesson.StartDate.Year}";
+            lvm.StartTime = lesson.StartDate.TimeOfDay.Hours.ToString("d2") + ":" + lesson.StartDate.TimeOfDay.Minutes.ToString("d2");
+            lvm.EndTime = lesson.EndDate.TimeOfDay.Hours.ToString("d2") + ":" + lesson.EndDate.TimeOfDay.Minutes.ToString("d2");
             lvm.Ordered = lesson.Ordered;
             lvm.Agenda = lesson.Agenda;
 

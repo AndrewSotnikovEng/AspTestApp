@@ -1,36 +1,74 @@
-﻿@inject IStatisticService service
+﻿@{
+    int counter = 1;
+}
+
+@inject IStatisticService service
 @model StatisticStudentsViewModel
 
 <div class="container">
     <div>
-        <h2 style="text-align: center">Учитель</h2>
+        <h2 style="text-align: center">УЧИТЕЛЬ</h2>
     </div>
-</div>
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col" >#</th>
-            <th scope="col" </th>
-            <th scope="col" >Среднее в неделю</th>
-            <th scope="col" >На этой неделе</th>
-            <th scope="col" >На прошлой</th>
-            <th scope="col" >Всего</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td></td>
-            <td>@service.GetTeacherAverageLessons()</td>
-            <td>@service.GetTeacherCurrentWeekLessons()</td>
-            <td>@service.GetTeachePreviousWeekLessons()</td>
-            <td>@service.GetTeacherToltalLessons()</td>
-        </tr>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" style="width: 5%; background-color: LightGray;vertical-align: top;">#</th>
+                <th scope="col" style="width: 45%;background-color: LightGray;vertical-align: top;"> </th>
+                <th scope="col" style="width: 10%;background-color: LightGray;vertical-align: top;">Среднее в неделю</th>
+                <th scope="col" style="width: 10%;background-color: LightGray;vertical-align: top;">На этой неделе</th>
+                <th scope="col" style="width: 10%;background-color: LightGray;vertical-align: top;">На прошлой</th>
+                <th scope="col" style="width: 10%;background-color: LightGray;vertical-align: top;">Всего</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td></td>
+                <td>@service.GetTeacherAverageLessons()</td>
+                <td>@service.GetTeacherCurrentWeekLessons()</td>
+                <td>@service.GetTeachePreviousWeekLessons()</td>
+                <td>@service.GetTeacherToltalLessons()</td>
+            </tr>
 
-    </tbody>
-</table>
-<div class="container">
-    <div >
-        <h2 style="text-align:center">Студенты</h2>
-    </div>
+        </tbody>
+    </table>
 </div>
+
+<div class="container">
+    <div>
+        <h2 style="text-align:center">СТУДЕНТЫ</h2>
+    </div>
+    @*<div class="col-12 col-md-4 mt-2 mb-2">
+
+    </div>*@
+    <div class="row spacer">
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col" style="width: 5%;background-color: LightGray;vertical-align: top;">#</th>
+                <th scope="col" style="width: 45%;background-color: LightGray;vertical-align: top;"> <input class="form-control" id="filterInput" /> </th>
+                <th scope="col" style="width: 10%;background-color: LightGray;vertical-align: top;">Среднее в неделю</th>
+                <th scope="col" style="width: 10%;background-color: LightGray;vertical-align: top;">На этой неделе</th>
+                <th scope="col" style="width: 10%;background-color: LightGray;vertical-align: top;">На прошлой</th>
+                <th scope="col" style="width: 10%;background-color: LightGray;vertical-align: top;">Всего</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model.Students.OrderBy(s => s.FirstName))
+            {
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td id="lesson-item">@s.FirstName @s.LastName</td>
+                    <td>@service.GetStudentAverageLessons(s.Id)</td>
+                    <td>@service.GetStudentCurrentWeekLessons(s.Id)</td>
+                    <td>@service.GetStudentPreviousWeekLessons(s.Id)</td>
+                    <td>@service.GetStudentToltalLessons(s.Id)</td>
+                </tr>
+                counter++;
+            }
+        </tbody>
+    </table>
+</div>
+<script src="~/lesson-filer.js"></script>
+

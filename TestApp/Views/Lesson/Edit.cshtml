@@ -26,8 +26,7 @@
                 </div>
                 <div class="row mb-1">
                     <div class="col-4">
-                        <input type="date" asp-for="LessonDate" class="form-control" value="@Model.LessonDateUniversal"
-                               min="@Model.LessonDateUniversalMin" max="@Model.LessonDateUniversalMax">
+                        <input type="text" id="datepicker" asp-for="LessonDate" class="form-control" value="@Model.LessonDate">
                     </div>
                     <div class="col-2">
                         <input type="time" asp-for="StartTime" class="form-control" value="@Model.StartTime">
@@ -56,4 +55,9 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="~/students-autocomplete.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+</script>
 

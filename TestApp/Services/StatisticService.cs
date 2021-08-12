@@ -17,26 +17,6 @@ namespace TestApp.Services
             _dbContext = dbContext;
         }
 
-        public int GetStudentAverageLessons()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetStudentCurrentWeekLessons()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetStudentPreviousWeekLessons()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetStudentToltalLessons()
-        {
-            throw new NotImplementedException();
-        }
-
         public int GetTeacherAverageLessons()
         {
             int result = 0;
@@ -54,11 +34,19 @@ namespace TestApp.Services
             int curWeekLessonCounter = 0;
 
             CultureInfo cul = CultureInfo.CurrentCulture;
-            int currentWeek = DateTime.Now.DayOfYear / 7;
+
+            int currentWeek = cul.Calendar.GetWeekOfYear(
+                DateTime.Now,
+                CalendarWeekRule.FirstDay,
+                DayOfWeek.Monday);
 
             foreach (var lesson in _dbContext.Lessons)
             {
-                int lessonWeek = lesson.StartDate.DayOfYear / 7;
+                int lessonWeek = cul.Calendar.GetWeekOfYear(
+                                lesson.StartDate,
+                                CalendarWeekRule.FirstDay,
+                                DayOfWeek.Monday);
+
                 if (lessonWeek == currentWeek)
                 {
                     curWeekLessonCounter++;
@@ -70,12 +58,108 @@ namespace TestApp.Services
 
         public int GetTeachePreviousWeekLessons()
         {
-            return 10;
+            int prevWeekLessonCounter = 0;
+
+            CultureInfo cul = CultureInfo.CurrentCulture;
+
+            int previousWeek = cul.Calendar.GetWeekOfYear(
+                DateTime.Now,
+                CalendarWeekRule.FirstDay,
+                DayOfWeek.Monday) - 1;
+
+            foreach (var lesson in _dbContext.Lessons)
+            {
+                int lessonWeek = cul.Calendar.GetWeekOfYear(
+                                lesson.StartDate,
+                                CalendarWeekRule.FirstDay,
+                                DayOfWeek.Monday);
+
+                if (lessonWeek == previousWeek)
+                {
+                    prevWeekLessonCounter++;
+                }
+            }
+
+            return prevWeekLessonCounter;
         }
 
         public int GetTeacherToltalLessons()
         {
             return _dbContext.Lessons.Count();
+        }
+
+        public int GetStudentAverageLessons(int studentId)
+        {
+            return 5;
+        }
+
+        public int GetStudentToltalLessons(int studentId)
+        {
+            int counter = 0;
+
+            foreach (var l in _dbContext.Lessons)
+            {
+                if (l.StudentId == studentId)
+                {
+                    counter++;
+                }
+            }
+
+            return counter;
+        }
+
+        public int GetStudentCurrentWeekLessons(int studentId)
+        {
+            int curWeekLessonCounter = 0;
+
+            CultureInfo cul = CultureInfo.CurrentCulture;
+
+            int currentWeek = cul.Calendar.GetWeekOfYear(
+                DateTime.Now,
+                CalendarWeekRule.FirstDay,
+                DayOfWeek.Monday);
+
+            foreach (var lesson in _dbContext.Lessons.Where(x => x.StudentId == studentId).ToList())
+            {
+                int lessonWeek = cul.Calendar.GetWeekOfYear(
+                                lesson.StartDate,
+                                CalendarWeekRule.FirstDay,
+                                DayOfWeek.Monday);
+
+                if (lessonWeek == currentWeek)
+                {
+                    curWeekLessonCounter++;
+                }
+            }
+
+            return curWeekLessonCounter;
+        }
+
+        public int GetStudentPreviousWeekLessons(int studentId)
+        {
+            int prevWeekLessonCounter = 0;
+
+            CultureInfo cul = CultureInfo.CurrentCulture;
+
+            int previousWeek = cul.Calendar.GetWeekOfYear(
+                DateTime.Now,
+                CalendarWeekRule.FirstDay,
+                DayOfWeek.Monday) - 1;
+
+            foreach (var lesson in _dbContext.Lessons.Where(x => x.StudentId == studentId).ToList())
+            {
+                int lessonWeek = cul.Calendar.GetWeekOfYear(
+                                lesson.StartDate,
+                                CalendarWeekRule.FirstDay,
+                                DayOfWeek.Monday);
+
+                if (lessonWeek == previousWeek)
+                {
+                    prevWeekLessonCounter++;
+                }
+            }
+
+            return prevWeekLessonCounter;
         }
     }
 }
