@@ -9,38 +9,64 @@
     <!-- Optional theme -->
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/lib/jquery/jquery.min.js"></script>
-    @*Some new script*@
-    @*<script src="~/lib/datapicker.js"></script>*@
+
 
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand m-lg-2" href="">PETRAHISTORY</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" style="background-color: #e3f2fd;" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Statistics" asp-action="Index">Статистика</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Student" asp-action="Index">Студенты</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Lesson" asp-action="Index">Занятия</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="About" asp-action="Index">Инфо</a>
-                </li>
-            </ul>
+
+
+<body style="background-image: url('https://sunderlandlab.sites.olt.ubc.ca/files/2020/01/BIO-BACKGROUND.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;">
+
+    <!-- Main block -->
+    <div class="d-flex justify-content-center">
+        <!-- Main container with border -->
+        <div class="container border border-secondary" style="min-height: 94vh; margin: 1.5vh auto; background-color:white;">
+            <!--Main container with header -->
+            <div class="container" style="padding:0px; margin-top:10px;">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-dark text-light">
+                        <a class="navbar-brand m-lg-2 text-light">PETRAHISTORY</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse bg-dark" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active">
+                                    <a class="nav-link text-light" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-controller="Statistics" asp-action="Index">Статистика</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-controller="Student" asp-action="Index">Студенты</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-controller="Lesson" asp-action="Index">Занятия</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-controller="About" asp-action="Index">Инфо</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!--CONTENT-->
+            <div class="container" style="min-height: 77vh">
+                @RenderBody()
+            </div>
+            <!--FOOTER -->
+            <div class="container bg-dark text-light" style="height: 40px; margin: 10px auto;">
+                <div class="row justify-content-center align-content-center" style="vertical-align:middle;">
+                    Powered by Andrii Sotnikov, Kyiv, @DateTime.Now.Year
+                </div>
+            </div>
+            <!--Main container with border-->
         </div>
-    </nav>
-    <div>
-        @RenderBody()
+        <!--Main block-->
     </div>
+
 </body>
 </html>

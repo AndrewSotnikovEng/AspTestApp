@@ -17,8 +17,9 @@ namespace TestApp.Models
 
         public override string ToString()
         {
-            
-            string output = $"{StartDate.ToString("dd/MM/yyyy")} --- {StartDate.ToString("HH:mm")} - {EndDate.ToString("HH:mm")} --- Оплачено: {Ordered}";
+            string orderedPresentation = Ordered ? "Оплачено" : "Не оплачено";            
+            string output = $"{StartDate.ToString("dd/MM/yyyy")} --- {StartDate.ToString("HH:mm")} - {EndDate.ToString("HH:mm")} --- {orderedPresentation}";
+
             return output;
         }
 
