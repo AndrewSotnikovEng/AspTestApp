@@ -88,9 +88,27 @@ namespace TestApp.Services
             return _dbContext.Lessons.Count();
         }
 
-        public int GetStudentAverageLessons(int studentId)
+        /*  1. Sort dates in descending order for the student
+         *  2. Get first week and get last week, measure interval between them
+         *  3. Divide amount of lessons by weeks interval
+         */
+        public double GetStudentAverageLessons(int studentId)
         {
-            return 5;
+            List<Lesson> lessons = _dbContext.Lessons.Where(x => x.StudentId == studentId).OrderBy(y => y.StartDate).ToList();
+            int totalLessons = lessons.Count();
+            if (totalLessons == 0) return 0;
+
+            DateTime studentFirstLesson = lessons.First().StartDate;
+            DateTime studentLastLesson = lessons.Last().StartDate;
+
+            int weekInterval = (int)(studentLastLesson - studentFirstLesson).TotalDays;
+            if (weekInterval == 0) return 0;
+
+            int weeks = (int)Math.Ceiling((double)weekInterval / 7);
+            double averageLessons = Math.Round((double)totalLessons / weeks,
+                                               2);
+
+            return averageLessons;
         }
 
         public int GetStudentToltalLessons(int studentId)
