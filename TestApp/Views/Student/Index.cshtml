@@ -2,15 +2,15 @@
 
 
 
-    <div class="container">
-        <div class="row spacer index-button">
-            <a class="btn btn-primary a-btn-slide-text"  asp-controller="Student" asp-action="Add">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                <span><strong>Add</strong></span>
-            </a>
-        </div>
-        @foreach (TestApp.Models.Student s in Model)
-        {
+<div class="container" style="margin-bottom: 60px;">
+    <div class="row spacer index-button">
+        <a class="btn btn-primary a-btn-slide-text" asp-controller="Student" asp-action="Add">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <span><strong>Add</strong></span>
+        </a>
+    </div>
+    @foreach (TestApp.Models.Student s in Model)
+    {
         <div class="row spacer border border-primary">
 
             <div class="col-12 col-md-10 align-self-center">
@@ -30,6 +30,6 @@
                 </a>
             </div>
         </div>
-        }
-      </div>
+    }
+</div>
 
