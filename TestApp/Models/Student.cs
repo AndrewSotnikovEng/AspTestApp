@@ -15,7 +15,9 @@ namespace TestApp.Models
         public string Grade { get; set; }
         public string DesiredUniversity { get; set; }
         public string PhoneNumber { get; set; }
-
+        
+        //navigation property
+        public List<Lesson> Lessons { get; set; }
         public override string ToString()
         {
             return $"{FirstName + " " + LastName} School: {School} - Grade: {Grade} - DesiredUniversity: {DesiredUniversity}";

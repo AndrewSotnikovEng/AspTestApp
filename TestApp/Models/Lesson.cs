@@ -8,13 +8,14 @@ namespace TestApp.Models
     public class Lesson
     {
         public int Id { get; set; }
-        public int StudentId { get; set; }
         public string Agenda { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool Ordered { get; set; }
         public string NextLessonAgenda { get; set; }
-
+        //nagivation property
+        public int StudentId { get; set; }
+        public Student Student { get; set; }
         public override string ToString()
         {
             string orderedPresentation = Ordered ? "Оплачено" : "Не оплачено";            
