@@ -28,8 +28,13 @@ namespace TestApp.Controllers
             {
                 Student student = _dbContext.Students.Where(s => s.Id == item.StudentId).FirstOrDefault();
                 string date = $"{item.StartDate.ToString("dd_MM_yyyy")}";
+                string fullName = (student.FirstName + student.LastName);
+                if (fullName.Length > 18)
+                {
+                    fullName = fullName.Substring(0, 18);
+                }
 
-                EventDto lesson = new EventDto(student.FirstName + " " + student.LastName, date);
+                EventDto lesson = new EventDto($"{fullName} : {student.Id}", date);
                 
                 lessons.Add(lesson);
             }

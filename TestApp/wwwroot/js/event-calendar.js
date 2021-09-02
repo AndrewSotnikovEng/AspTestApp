@@ -1,10 +1,7 @@
 /*  * * * * * BASIC USAGE * * * * *
 
         let events = getMockData();
-        drawGrid()
-        setNextDates()
-        setPreviousDates()
-        setMonthTitle()
+        drawCalendar();
         mapEvents(events);
 
 */
@@ -68,6 +65,8 @@ function drawGrid() {
 
             var dayDiv = document.createElement("div")
             dayDiv.setAttribute("onClick", "dayDivOnClickHandler(this)");
+            dayDiv.setAttribute("ondragover", "onDragOver(event)");
+            dayDiv.setAttribute("ondrop", "onDrop(event)");
 
             dayDivHeader = document.createElement("div")
             dayDivHeader.classList.add("daydiv-header")
@@ -199,8 +198,11 @@ function mapEvents(events) {
         let dayDivContent = document.getElementById(element.date);
         if (dayDivContent != null) {
             if (dayDivContent.childNodes.length < maxCellRecords) {
-                let value = dayDivContent.innerHTML;
-                dayDivContent.innerHTML = value + `<p>${element.name}</p>`;
+                let rowDiw = document.createElement("div");
+                rowDiw.innerHTML = element.name;
+                rowDiw.setAttribute("draggable", "true")
+                rowDiw.setAttribute("ondragstart", "onDragStart(event)");
+                dayDivContent.appendChild(rowDiw);
             }
             switch (dayDivContent.childNodes.length) {
                 case 1:
@@ -262,6 +264,32 @@ function getMockData() {
 
     return events;
 }
+
+
+function onDragStart(event) {
+    event
+        .dataTransfer
+        .setData('text/plain', event.target.innerHTML);
+}
+
+function onDragOver(event) {
+    event.preventDefault();
+}
+
+function onDrop(event) {
+    const text = event
+        .dataTransfer
+        .getData('text');
+
+    let draggable = document.createElement("div");
+    draggable.innerHTML = text;
+    draggable.setAttribute("draggable", "true");
+    draggable.setAttribute("ondragstart", "onDragStart(event)");
+
+    const dropzone = event.target;
+    dropzone.appendChild(draggable);
+}
+
 
 //custom handler implementation
 function dayDivOnClickHandler(dayDiv) {
