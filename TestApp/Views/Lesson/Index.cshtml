@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<TestApp.Models.Lesson>
 @inject ILessonService service
 
+
+<link type="text/css" rel="stylesheet" href="~/css/event-calendar.css" />
+
 <div class="container" style="margin-bottom: 60px;">
     <div class="row spacer">
         <div class="col-12 col-md-1 mt-2 mb-2">
@@ -13,20 +16,21 @@
             @*empty space*@
         </div>
         <div class="col-12 col-md-5 mt-2 mb-2">
-            <input class="form-control" id="filterInput"/>
+            <input class="form-control" id="filterInput" />
         </div>
     </div>
+    <div id="event-calendar"></div>
     @foreach (TestApp.Models.Lesson l in Model)
     {
         <div class="row spacer border border-primary align-items-center" style="background-color:@service.GetPaymentColorById(l.Id)">
 
 
             <div class="col-12 col-md-5" id="lesson-item">
-                    Student: @service.GetStudentNameById(l.StudentId)
+                Student: @service.GetStudentNameById(l.StudentId)
             </div>
 
             <div class="col-12 col-md-5">
-                    @l.ToString()
+                @l.ToString()
             </div>
 
 
@@ -46,4 +50,48 @@
     }
 </div>
 <script src="~/js/lesson-filer.js"></script>
+<script src="~/js/event-calendar.js"></script>
+<script>
 
+    /**
+     * TAP-версия загрузки JSON по HTTP
+     * param {RequestInfo} url Строка URL или объект Request
+     * param {RequestInit | undefined} init Объект с опциями к запросу
+     * returns {Promise<any>} Обещание вернуть JSON-объект
+     */
+    async function fetchJSONAsync(url, init) {
+        let response = await fetch(url, init);
+        if (response.ok) {
+            let json = await response.json();
+            return json;
+        }
+        else
+            throw new Error(`${response.status}: ${response.statusText}`);
+    }
+
+    window.onload = function () {
+        main();
+    };
+
+    // Асинхронная функция, являющаяся например обработчиком кнопки
+    // или при событии загрузки страницы
+    async function main() {
+        this.disabled = true;
+        let url = '/lessonapi';
+        try {
+            let events = await fetchJSONAsync(url);
+            console.log(events);
+
+            drawGrid();
+            setNextDates();
+            setPreviousDates()
+            setMonthTitle()
+            mapEvents(events);
+        } catch (error) {
+            console.log(error.message);
+        } finally {
+            this.disabled = false;
+        }
+    }
+
+</script>
