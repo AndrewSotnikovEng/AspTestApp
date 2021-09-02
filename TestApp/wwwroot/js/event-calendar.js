@@ -31,6 +31,12 @@ class CalendarEvent {
 }
 
 
+function drawCalendar() {
+    drawGrid()
+    setNextDates()
+    setPreviousDates()
+    setMonthTitle()
+}
 
 
 function drawGrid() {
@@ -39,7 +45,7 @@ function drawGrid() {
     monthHeader.setAttribute("id", "month-header")
     calendarContainer.appendChild(monthHeader);
 
-    var dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat',"Sun"];
+    var dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', "Sun"];
     //draw header
     var weekDiv = document.createElement("div");
     weekDiv.classList.add("weekdiv")
@@ -61,6 +67,7 @@ function drawGrid() {
         for (let dayIndex = 0; dayIndex < days; dayIndex++) {
 
             var dayDiv = document.createElement("div")
+            dayDiv.setAttribute("onClick", "dayDivOnClickHandler(this)");
 
             dayDivHeader = document.createElement("div")
             dayDivHeader.classList.add("daydiv-header")
@@ -254,4 +261,39 @@ function getMockData() {
     ]
 
     return events;
+}
+
+//custom handler implementation
+function dayDivOnClickHandler(dayDiv) {
+
+    console.log(`Clicked div with ID: ${dayDiv.lastChild.id}`)
+    let searchableDate = dayDiv.lastChild.id.replace(/_/g, '.');
+
+    document.querySelectorAll('[id=lesson-item]').forEach(
+        element => {
+            //show all, if already selected
+            if (dayDiv.classList.contains("selected-day-div")) {
+                element.parentNode.style.display = "flex";
+            }
+            //hide all, except of selected
+            else {
+                let lessonContent = element.nextElementSibling.innerHTML;
+                //hide nod needed
+                if (!lessonContent.includes(searchableDate)) {
+                    //clear all previous selections
+                    let selectedDaydivsCount = document.getElementsByClassName('selected-day-div').length;
+                    if (selectedDaydivsCount > 0) {
+                        document.getElementsByClassName('selected-day-div')[0].classList.remove("selected-day-div")
+                    }
+                    element.parentNode.style.display = "none";
+                }
+                //show selected
+                else {
+                    element.parentNode.style.display = "flex";
+                }
+            }
+        }
+    )
+    dayDiv.classList.toggle("selected-day-div");
+
 }

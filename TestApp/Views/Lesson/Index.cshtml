@@ -20,34 +20,36 @@
         </div>
     </div>
     <div id="event-calendar"></div>
-    @foreach (TestApp.Models.Lesson l in Model)
-    {
-        <div class="row spacer border border-primary align-items-center" style="background-color:@service.GetPaymentColorById(l.Id)">
+    <div style="margin-bottom: 20px; height: 100%;">
+        @foreach (TestApp.Models.Lesson l in Model)
+        {
+            <div class="row spacer border border-primary align-items-center" style="background-color:@service.GetPaymentColorById(l.Id)">
 
 
-            <div class="col-12 col-md-5" id="lesson-item">
-                Student: @service.GetStudentNameById(l.StudentId)
+                <div class="col-12 col-md-5" id="lesson-item">
+                    Student: @service.GetStudentNameById(l.StudentId)
+                </div>
+
+                <div class="col-12 col-md-5">
+                    @l.ToString()
+                </div>
+
+
+                <div class="col-12 col-md-1 mt-2 mb-2">
+                    <a class="btn btn-primary a-btn-slide-text index-button" asp-controller="Lesson" asp-action="Edit" asp-route-id="@l.Id">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        <span><strong>Edit</strong></span>
+                    </a>
+                </div>
+                <div class="col-12 col-md-1 mt-2 mb-2">
+                    <a class="btn btn-primary a-btn-slide-text index-button" asp-controller="Lesson" asp-action="Delete" asp-route-id="@l.Id">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        <span><strong>Delete</strong></span>
+                    </a>
+                </div>
             </div>
-
-            <div class="col-12 col-md-5">
-                @l.ToString()
-            </div>
-
-
-            <div class="col-12 col-md-1 mt-2 mb-2">
-                <a class="btn btn-primary a-btn-slide-text index-button" asp-controller="Lesson" asp-action="Edit" asp-route-id="@l.Id">
-                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                    <span><strong>Edit</strong></span>
-                </a>
-            </div>
-            <div class="col-12 col-md-1 mt-2 mb-2">
-                <a class="btn btn-primary a-btn-slide-text index-button" asp-controller="Lesson" asp-action="Delete" asp-route-id="@l.Id">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    <span><strong>Delete</strong></span>
-                </a>
-            </div>
-        </div>
-    }
+        }
+    </div>
 </div>
 <script src="~/js/lesson-filer.js"></script>
 <script src="~/js/event-calendar.js"></script>
@@ -82,10 +84,7 @@
             let events = await fetchJSONAsync(url);
             console.log(events);
 
-            drawGrid();
-            setNextDates();
-            setPreviousDates()
-            setMonthTitle()
+            drawCalendar();
             mapEvents(events);
         } catch (error) {
             console.log(error.message);

@@ -57,6 +57,11 @@
     outline: 5px solid blue;
 }
 
+.selected-day-div {
+    
+    outline: 5px solid orange;
+}
+
 #month-header {
     font-size: 30px;
     text-align: center;
